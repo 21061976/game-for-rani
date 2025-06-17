@@ -89,7 +89,14 @@
         .layer-17 { background: linear-gradient(45deg, #fdbb2d, #22c1c3); z-index: 4; }
         .layer-18 { background: linear-gradient(45deg, #ff9a9e, #fecfef); z-index: 3; }
         .layer-19 { background: linear-gradient(45deg, #a18cd1, #fbc2eb); z-index: 2; }
-        .layer-20 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 1; }
+        .layer-21 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 8; }
+        .layer-22 { background: linear-gradient(45deg, #ff9a9e, #fecfef); z-index: 7; }
+        .layer-23 { background: linear-gradient(45deg, #a18cd1, #fbc2eb); z-index: 6; }
+        .layer-24 { background: linear-gradient(45deg, #fad0c4, #ffd1ff); z-index: 5; }
+        .layer-25 { background: linear-gradient(45deg, #ff8a80, #ffb74d); z-index: 4; }
+        .layer-26 { background: linear-gradient(45deg, #81c784, #aed581); z-index: 3; }
+        .layer-27 { background: linear-gradient(45deg, #64b5f6, #42a5f5); z-index: 2; }
+        .layer-28 { background: linear-gradient(45deg, #ffd54f, #ffecb3); z-index: 1; }
         
         .layer-removed {
             animation: tearAway 0.8s ease-out forwards;
@@ -128,10 +135,75 @@
             75% { transform: translateX(5px) rotate(1deg); }
         }
         
-        @keyframes bounce {
-            0% { transform: scale(1); }
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        .confetti.red { background: #ff6b6b; }
+        .confetti.blue { background: #4ecdc4; }
+        .confetti.yellow { background: #feca57; }
+        .confetti.green { background: #48dbfb; }
+        .confetti.purple { background: #ff9ff3; }
+        .confetti.orange { background: #ff9f43; }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .celebration-text {
+            color: white;
+            font-size: 4em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: rainbow 2s infinite;
+        }
+        
+        .celebration-subtext {
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes rainbow {
+            0% { color: #ff6b6b; }
+            16% { color: #4ecdc4; }
+            32% { color: #45b7d1; }
+            48% { color: #f093fb; }
+            64% { color: #4facfe; }
+            80% { color: #43e97b; }
+            100% { color: #ff6b6b; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
         
         .current-player {
@@ -338,7 +410,7 @@
             <div class="current-player" id="currentPlayer"></div>
             
             <div class="package-container" onclick="openLayer()">
-                <div class="layer-counter" id="layerCounter">20</div>
+                <div class="layer-counter" id="layerCounter">28</div>
                 <div class="package-layer layer-1" id="layer1">שכבה 1</div>
                 <div class="package-layer layer-2" id="layer2">שכבה 2</div>
                 <div class="package-layer layer-3" id="layer3">שכבה 3</div>
@@ -358,7 +430,15 @@
                 <div class="package-layer layer-17" id="layer17">שכבה 17</div>
                 <div class="package-layer layer-18" id="layer18">שכבה 18</div>
                 <div class="package-layer layer-19" id="layer19">שכבה 19</div>
-                <div class="package-layer layer-20" id="layer20">🎁 מתנה!</div>
+                <div class="package-layer layer-20" id="layer20">שכבה 20</div>
+                <div class="package-layer layer-21" id="layer21">שכבה 21</div>
+                <div class="package-layer layer-22" id="layer22">שכבה 22</div>
+                <div class="package-layer layer-23" id="layer23">שכבה 23</div>
+                <div class="package-layer layer-24" id="layer24">שכבה 24</div>
+                <div class="package-layer layer-25" id="layer25">שכבה 25</div>
+                <div class="package-layer layer-26" id="layer26">שכבה 26</div>
+                <div class="package-layer layer-27" id="layer27">שכבה 27</div>
+                <div class="package-layer layer-28" id="layer28">🎁 מתנה!</div>
             </div>
             
             <div class="task-display" id="taskDisplay">
@@ -395,26 +475,34 @@
         let taskCompleted = false;
         
         const tasks = [
-            "🎭 עשה פרצוף מצחיק למצלמה!",
-            "🐶 חקה קול של חיה מבחירתך",
-            "🕺 רקוד 10 שניות בלי מוזיקה",
-            "🌈 מצא משהו צבעוני בבית ותראה לכולם",
-            "📖 ספר בדיחה או חידה",
-            "🎵 שיר שיר קצר שכולם מכירים",
-            "🤸 עשה תרגיל התעמלות (קפיצות, מתיחות)",
-            "🎨 צייר משהו באוויר והאחרים ינחשו מה זה",
-            "📸 הבא דבר שמתחיל באות ב' ותראה לכולם",
-            "🎊 ברך את כל החברים בכיתה במשפט יפה!",
-            "🦶 הראה ריקוד ישיבה (רק ידיים)",
-            "🗣️ אמור משפט עם קול מצחיק",
-            "🙃 עשה פעולה הפוכה (לדוגמה: תגיד שלום כשאתה מתכוון ביי)",
-            "🎪 עשה חיקוי של מישהו מהכיתה (בחיוב!)",
-            "🧙‍♀️ המצא כישוף קסם ותגיד אותו",
-            "🍕 ספר איזה אוכל אתה הכי אוהב ולמה",
-            "⭐ תן מחמאה לחבר מהכיתה",
-            "🎯 עשה תנועה ואחרים יחקו אותך",
-            "🌟 ספר על דבר אחד שאתה גאה בו",
-            "🎉 חגוג עם כל הכיתה - צרחו יחד כל הכבוד!"
+            "שלח את החבילה עוברת לתלמיד/ה שמאחר/ת באופן קבוע לבית הספר",
+            "שלח את החבילה עוברת לתלמיד/ה שמתארגן/ת הכי מהר לשיעורים",
+            "שלח את החבילה עוברת לתלמיד/ה שמצחיק/ה את הכיתה לעיתים קרובות",
+            "שלח את החבילה עוברת לתלמיד/ה שמתלבש/ת בסטייל אופנתי",
+            "שלח את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע לצאת מהשיעור...",
+            "שלח את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע מהמורה שיעור חופשי",
+            "שלח את החבילה עוברת לתלמיד/ה הכי חרוץ/ה בכיתה",
+            "שלח את החבילה עוברת לתלמיד/ה שמציע/ה ויוזם/ת מפגשי גיבוש כיתתיים",
+            "שלח את החבילה עוברת לתלמיד/ה שמגיע/ה ראשון בבוקר לכיתה",
+            "שלח את החבילה עוברת לתלמיד/ה שמגלה יכולות וכישורים בשיעורי ספורט",
+            "שלח את החבילה עוברת לתלמיד/ה שמפטפט/ת לעיתים קרובות בשיעורים...",
+            "שלח את החבילה עוברת לתלמיד/ה פעיל/ה חברתית או מעורב בפעילויות חברתיות בבית הספר",
+            "שלח את החבילה עוברת לתלמיד/ה שכל הזמן צמוד לטלפון שלו/ה",
+            "שלח את החבילה עוברת לתלמיד/ה שדואג/ת לשמור על ניקיון הכיתה",
+            "שלח את החבילה עוברת לתלמיד/ה שתמיד עוזר/ת לתלמידים אחרים בכיתה",
+            "שלח את החבילה עוברת לתלמיד/ה שלא החסיר/ה יום אחד מבית הספר",
+            "שלח את החבילה עוברת לתלמיד/ה עם המוטיבציה הכי גבוהה ללמידה",
+            "שלח את החבילה עוברת לתלמיד/ה האחראי/ת ביותר בכיתה...",
+            "שלח את החבילה עוברת לתלמיד/ה שלא מפספס אף הודעה של המחנכת",
+            "שלח את החבילה עוברת לתלמיד/ה שמאוד פעיל/ה בקבוצת הווטסאפ הכיתתית",
+            "שלח את החבילה עוברת לתלמיד/ה הכי גדול בגיל בכיתה",
+            "שלח את החבילה עוברת לתלמיד/ה שתמיד יש לו את כל הציוד הדרוש בתיק",
+            "שלח את החבילה עוברת לתלמיד/ה בעל/ת נתינה באופן תמידי",
+            "שלח את החבילה עוברת לתלמיד/ה שתמיד שואל או שואלת למי יש עט עיפרון או חודים 0.5?",
+            "שלח את החבילה עוברת לתלמיד/ה שמכיר/ה את כל הסדרות בנטפליקס ויכול/ה להמליץ איזו סדרה לצפות",
+            "שלח את החבילה עוברת לתלמיד/ה שתמיד נותן/ת עצות חכמות וטובות",
+            "שלח את החבילה עוברת לתלמיד/ה שאף פעם לא צועק בכיתה",
+            "🎉 שלח את הקונפטי שבחבילה עוברת לכל תלמידי הכיתה! 🎊"
         ];
         
         function addPlayer() {
@@ -464,11 +552,11 @@
         }
         
         function openLayer() {
-            if (!gameStarted || currentLayer > 20 || taskCompleted) return;
+            if (!gameStarted || currentLayer > 28 || taskCompleted) return;
             
             // הסרת השכבה הנוכחית עם אפקט קריעה
             const layer = document.getElementById(`layer${currentLayer}`);
-            layer.classList.add('layer-removed');
+            if (layer) layer.classList.add('layer-removed');
             
             // הוספת רעידה לחבילה
             const packageContainer = document.querySelector('.package-container');
@@ -491,7 +579,14 @@
             
             // עדכון מונה השכבות
             const layerCounter = document.getElementById('layerCounter');
-            layerCounter.textContent = 20 - currentLayer;
+            layerCounter.textContent = 28 - currentLayer;
+            
+            // בדיקה אם זו המשימה האחרונה - הפעלת קונפטי!
+            if (currentLayer === 28) {
+                setTimeout(() => {
+                    startConfettiCelebration();
+                }, 1000);
+            }
             
             // הפעלת כפתור "סיימתי את המשימה"
             document.getElementById('finishTaskBtn').disabled = false;
@@ -500,17 +595,17 @@
             currentLayer++;
             
             // בדיקה אם המשחק נגמר
-            if (currentLayer > 20) {
+            if (currentLayer > 28) {
                 setTimeout(() => {
                     document.getElementById('game-phase').style.display = 'none';
                     document.getElementById('game-over').style.display = 'block';
-                }, 2000);
+                }, 3000);
             }
         }
         
         function finishTask() {
             // הצגת בחירת השחקן הבא
-            if (currentLayer <= 20) {
+            if (currentLayer <= 28) {
                 showPlayerSelection();
             }
         }
@@ -563,15 +658,52 @@
             document.getElementById('playerSelection').style.display = 'none';
             
             // איפוס השכבות
-            for (let i = 1; i <= 20; i++) {
+            for (let i = 1; i <= 28; i++) {
                 const layer = document.getElementById(`layer${i}`);
-                layer.classList.remove('layer-removed');
+                if (layer) layer.classList.remove('layer-removed');
             }
             
             // איפוס הטקסטים
             document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי להתחיל!';
-            document.getElementById('layerCounter').textContent = '20';
+            document.getElementById('layerCounter').textContent = '28';
             document.getElementById('finishTaskBtn').disabled = true;
+        }
+        
+        
+        function startConfettiCelebration() {
+            // יצירת אוברליי חגיגה
+            const overlay = document.createElement('div');
+            overlay.className = 'celebration-overlay';
+            overlay.style.display = 'flex';
+            overlay.innerHTML = `
+                <div class="celebration-text">🎉 כל הכבוד לכיתה! 🎊</div>
+                <div class="celebration-subtext">סיימתם את כל המשימות!</div>
+            `;
+            document.body.appendChild(overlay);
+            
+            // יצירת קונפטי
+            const colors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = `confetti ${colors[Math.floor(Math.random() * colors.length)]}`;
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.animation = `confetti-fall ${confetti.style.animationDuration} linear`;
+                    document.body.appendChild(confetti);
+                    
+                    // מחיקת הקונפטי אחרי שנופל
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 50);
+            }
+            
+            // הסרת האוברליי אחרי 4 שניות
+            setTimeout(() => {
+                overlay.remove();
+            }, 4000);
         }
         
         // אפשרות להוסיף שחקן בלחיצה על Enter

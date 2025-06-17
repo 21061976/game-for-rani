@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חבילה עוברת דיגיטלית</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .title {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .package-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .package-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .package-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .layer-1 { background: linear-gradient(45deg, #ff6b6b, #ee5a52); z-index: 20; }
+        .layer-2 { background: linear-gradient(45deg, #4ecdc4, #44a08d); z-index: 19; }
+        .layer-3 { background: linear-gradient(45deg, #45b7d1, #2980b9); z-index: 18; }
+        .layer-4 { background: linear-gradient(45deg, #f093fb, #f5576c); z-index: 17; }
+        .layer-5 { background: linear-gradient(45deg, #4facfe, #00f2fe); z-index: 16; }
+        .layer-6 { background: linear-gradient(45deg, #43e97b, #38f9d7); z-index: 15; }
+        .layer-7 { background: linear-gradient(45deg, #fa709a, #fee140); z-index: 14; }
+        .layer-8 { background: linear-gradient(45deg, #a8edea, #fed6e3); z-index: 13; }
+        .layer-9 { background: linear-gradient(45deg, #ffecd2, #fcb69f); z-index: 12; }
+        .layer-10 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 11; }
+        .layer-11 { background: linear-gradient(45deg, #96fbc4, #f9f047); z-index: 10; }
+        .layer-12 { background: linear-gradient(45deg, #ffecd2, #fcb69f); z-index: 9; }
+        .layer-13 { background: linear-gradient(45deg, #fccb90, #d57eeb); z-index: 8; }
+        .layer-14 { background: linear-gradient(45deg, #e0c3fc, #9bb5ff); z-index: 7; }
+        .layer-15 { background: linear-gradient(45deg, #fbd3e9, #bb377d); z-index: 6; }
+        .layer-16 { background: linear-gradient(45deg, #89f7fe, #66a6ff); z-index: 5; }
+        .layer-17 { background: linear-gradient(45deg, #fdbb2d, #22c1c3); z-index: 4; }
+        .layer-18 { background: linear-gradient(45deg, #ff9a9e, #fecfef); z-index: 3; }
+        .layer-19 { background: linear-gradient(45deg, #a18cd1, #fbc2eb); z-index: 2; }
+        .layer-20 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 1; }
+        
+        .layer-removed {
+            animation: tearAway 0.8s ease-out forwards;
+        }
+        
+        .layer-removed {
+            animation: tearAway 0.8s ease-out forwards;
+        }
+        
+        @keyframes tearAway {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            25% { 
+                transform: scale(1.1) rotate(-5deg);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: scale(1.2) rotate(10deg);
+                opacity: 0.6;
+            }
+            75% { 
+                transform: scale(0.5) rotate(-15deg) translateY(-50px);
+                opacity: 0.3;
+            }
+            100% { 
+                transform: scale(0) rotate(45deg) translateY(-100px);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-1deg); }
+            75% { transform: translateX(5px) rotate(1deg); }
+        }
+        
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .current-player {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .task-display {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2d3436;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #495057;
+            font-size: 1.1em;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .player-setup {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .player-input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1em;
+            margin: 10px;
+            width: 200px;
+        }
+        
+        .player-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .player-tag {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .player-selection {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .player-selection h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .player-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .player-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .player-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+        
+        .player-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .game-over {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .layer-counter {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="title">🎁 חבילה עוברת דיגיטלית</h1>
+        <p class="subtitle">משחק קבוצתי מהנה לכיתה ג'</p>
+        
+        <div id="setup-phase">
+            <div class="player-setup">
+                <h3>הגדרת שחקנים</h3>
+                <input type="text" id="playerName" class="player-input" placeholder="הכנס שם תלמיד">
+                <button onclick="addPlayer()" class="btn btn-primary">הוסף שחקן</button>
+                <div id="playerList" class="player-list"></div>
+                <button onclick="startGame()" class="btn btn-success" id="startBtn" disabled>התחל משחק!</button>
+            </div>
+        </div>
+        
+        <div id="game-phase" style="display: none;">
+            <div class="instructions">
+                לחץ על החבילה כדי לפתוח שכבה ולגלות את המשימה!
+            </div>
+            
+            <div class="current-player" id="currentPlayer"></div>
+            
+            <div class="package-container" onclick="openLayer()">
+                <div class="layer-counter" id="layerCounter">20</div>
+                <div class="package-layer layer-1" id="layer1">שכבה 1</div>
+                <div class="package-layer layer-2" id="layer2">שכבה 2</div>
+                <div class="package-layer layer-3" id="layer3">שכבה 3</div>
+                <div class="package-layer layer-4" id="layer4">שכבה 4</div>
+                <div class="package-layer layer-5" id="layer5">שכבה 5</div>
+                <div class="package-layer layer-6" id="layer6">שכבה 6</div>
+                <div class="package-layer layer-7" id="layer7">שכבה 7</div>
+                <div class="package-layer layer-8" id="layer8">שכבה 8</div>
+                <div class="package-layer layer-9" id="layer9">שכבה 9</div>
+                <div class="package-layer layer-10" id="layer10">שכבה 10</div>
+                <div class="package-layer layer-11" id="layer11">שכבה 11</div>
+                <div class="package-layer layer-12" id="layer12">שכבה 12</div>
+                <div class="package-layer layer-13" id="layer13">שכבה 13</div>
+                <div class="package-layer layer-14" id="layer14">שכבה 14</div>
+                <div class="package-layer layer-15" id="layer15">שכבה 15</div>
+                <div class="package-layer layer-16" id="layer16">שכבה 16</div>
+                <div class="package-layer layer-17" id="layer17">שכבה 17</div>
+                <div class="package-layer layer-18" id="layer18">שכבה 18</div>
+                <div class="package-layer layer-19" id="layer19">שכבה 19</div>
+                <div class="package-layer layer-20" id="layer20">🎁 מתנה!</div>
+            </div>
+            
+            <div class="task-display" id="taskDisplay">
+                לחץ על החבילה כדי להתחיל!
+            </div>
+            
+            <div class="player-selection" id="playerSelection">
+                <h3>עכשיו תור של <span id="currentPlayerName"></span> לבחור למי להעביר את החבילה!</h3>
+                <div class="player-buttons" id="playerButtons"></div>
+                <div class="used-players" id="usedPlayers"></div>
+            </div>
+            
+            <div class="controls">
+                <button onclick="finishTask()" class="btn btn-success" id="finishTaskBtn" disabled>סיימתי את המשימה!</button>
+                <button onclick="resetGame()" class="btn btn-warning">איפוס משחק</button>
+            </div>
+        </div>
+        
+        <div id="game-over" style="display: none;">
+            <div class="game-over">
+                🎉 המשחק הסתיים! 🎉<br>
+                כל הכבוד לכל השחקנים!
+            </div>
+            <button onclick="resetGame()" class="btn btn-primary">משחק חדש</button>
+        </div>
+    </div>
+
+    <script>
+        let players = [];
+        let currentPlayerIndex = 0;
+        let currentLayer = 1;
+        let gameStarted = false;
+        let usedPlayers = [];
+        let taskCompleted = false;
+        
+        const tasks = [
+            "🎭 עשה פרצוף מצחיק למצלמה!",
+            "🐶 חקה קול של חיה מבחירתך",
+            "🕺 רקוד 10 שניות בלי מוזיקה",
+            "🌈 מצא משהו צבעוני בבית ותראה לכולם",
+            "📖 ספר בדיחה או חידה",
+            "🎵 שיר שיר קצר שכולם מכירים",
+            "🤸 עשה תרגיל התעמלות (קפיצות, מתיחות)",
+            "🎨 צייר משהו באוויר והאחרים ינחשו מה זה",
+            "📸 הבא דבר שמתחיל באות ב' ותראה לכולם",
+            "🎊 ברך את כל החברים בכיתה במשפט יפה!",
+            "🦶 הראה ריקוד ישיבה (רק ידיים)",
+            "🗣️ אמור משפט עם קול מצחיק",
+            "🙃 עשה פעולה הפוכה (לדוגמה: תגיד שלום כשאתה מתכוון ביי)",
+            "🎪 עשה חיקוי של מישהו מהכיתה (בחיוב!)",
+            "🧙‍♀️ המצא כישוף קסם ותגיד אותו",
+            "🍕 ספר איזה אוכל אתה הכי אוהב ולמה",
+            "⭐ תן מחמאה לחבר מהכיתה",
+            "🎯 עשה תנועה ואחרים יחקו אותך",
+            "🌟 ספר על דבר אחד שאתה גאה בו",
+            "🎉 חגוג עם כל הכיתה - צרחו יחד כל הכבוד!"
+        ];
+        
+        function addPlayer() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (playerName && !players.includes(playerName)) {
+                players.push(playerName);
+                updatePlayerList();
+                document.getElementById('playerName').value = '';
+                document.getElementById('startBtn').disabled = players.length < 2;
+            }
+        }
+        
+        function updatePlayerList() {
+            const playerList = document.getElementById('playerList');
+            playerList.innerHTML = players.map(player => 
+                `<span class="player-tag">${player}</span>`
+            ).join('');
+        }
+        
+        function startGame() {
+            if (players.length < 2) return;
+            
+            gameStarted = true;
+            usedPlayers = []; // איפוס רשימת השחקנים שכבר שיחקו
+            document.getElementById('setup-phase').style.display = 'none';
+            document.getElementById('game-phase').style.display = 'block';
+            updateCurrentPlayer();
+        }
+        
+        function updateCurrentPlayer() {
+            const currentPlayerDiv = document.getElementById('currentPlayer');
+            currentPlayerDiv.textContent = `תור של: ${players[currentPlayerIndex]}`;
+            
+            // הוספת השחקן הנוכחי לרשימת השחקנים ששיחקו
+            if (!usedPlayers.includes(players[currentPlayerIndex])) {
+                usedPlayers.push(players[currentPlayerIndex]);
+            }
+            
+            updateUsedPlayersList();
+        }
+        
+        function updateUsedPlayersList() {
+            const usedPlayersDiv = document.getElementById('usedPlayers');
+            if (usedPlayers.length > 0) {
+                usedPlayersDiv.textContent = `שחקנים ששיחקו כבר: ${usedPlayers.join(', ')}`;
+            }
+        }
+        
+        function openLayer() {
+            if (!gameStarted || currentLayer > 20 || taskCompleted) return;
+            
+            // הסרת השכבה הנוכחית עם אפקט קריעה
+            const layer = document.getElementById(`layer${currentLayer}`);
+            layer.classList.add('layer-removed');
+            
+            // הוספת רעידה לחבילה
+            const packageContainer = document.querySelector('.package-container');
+            packageContainer.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => {
+                packageContainer.style.animation = '';
+            }, 500);
+            
+            // הצגת המשימה
+            const taskDisplay = document.getElementById('taskDisplay');
+            if (currentLayer <= tasks.length) {
+                taskDisplay.textContent = tasks[currentLayer - 1];
+                taskDisplay.style.animation = 'bounce 0.8s ease-out';
+                setTimeout(() => {
+                    taskDisplay.style.animation = '';
+                }, 800);
+            } else {
+                taskDisplay.textContent = "🎁 מצאת את המתנה! כל הכבוד!";
+            }
+            
+            // עדכון מונה השכבות
+            const layerCounter = document.getElementById('layerCounter');
+            layerCounter.textContent = 20 - currentLayer;
+            
+            // הפעלת כפתור "סיימתי את המשימה"
+            document.getElementById('finishTaskBtn').disabled = false;
+            taskCompleted = true;
+            
+            currentLayer++;
+            
+            // בדיקה אם המשחק נגמר
+            if (currentLayer > 20) {
+                setTimeout(() => {
+                    document.getElementById('game-phase').style.display = 'none';
+                    document.getElementById('game-over').style.display = 'block';
+                }, 2000);
+            }
+        }
+        
+        function finishTask() {
+            // הצגת בחירת השחקן הבא
+            if (currentLayer <= 20) {
+                showPlayerSelection();
+            }
+        }
+        
+        function showPlayerSelection() {
+            const playerSelection = document.getElementById('playerSelection');
+            const currentPlayerName = document.getElementById('currentPlayerName');
+            const playerButtons = document.getElementById('playerButtons');
+            
+            currentPlayerName.textContent = players[currentPlayerIndex];
+            playerSelection.style.display = 'block';
+            
+            // יצירת כפתורים לכל השחקנים (חוץ מהשחקן הנוכחי)
+            const availablePlayers = players.filter((player, index) => index !== currentPlayerIndex);
+            
+            playerButtons.innerHTML = availablePlayers.map(player => 
+                `<button class="player-btn" onclick="selectNextPlayer('${player}')">${player}</button>`
+            ).join('');
+            
+            document.getElementById('finishTaskBtn').disabled = true;
+        }
+        
+        function selectNextPlayer(selectedPlayer) {
+            // מציאת האינדקס של השחקן שנבחר
+            currentPlayerIndex = players.indexOf(selectedPlayer);
+            
+            // הסתרת בחירת השחקן
+            document.getElementById('playerSelection').style.display = 'none';
+            
+            // עדכון השחקן הנוכחי
+            updateCurrentPlayer();
+            
+            // איפוס המשימה
+            taskCompleted = false;
+            document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי לפתוח את השכבה הבאה!';
+        }
+        
+        function resetGame() {
+            // איפוס כל המשתנים
+            currentLayer = 1;
+            currentPlayerIndex = 0;
+            gameStarted = false;
+            usedPlayers = [];
+            taskCompleted = false;
+            
+            // איפוס הממשק
+            document.getElementById('setup-phase').style.display = 'block';
+            document.getElementById('game-phase').style.display = 'none';
+            document.getElementById('game-over').style.display = 'none';
+            document.getElementById('playerSelection').style.display = 'none';
+            
+            // איפוס השכבות
+            for (let i = 1; i <= 20; i++) {
+                const layer = document.getElementById(`layer${i}`);
+                layer.classList.remove('layer-removed');
+            }
+            
+            // איפוס הטקסטים
+            document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי להתחיל!';
+            document.getElementById('layerCounter').textContent = '20';
+            document.getElementById('finishTaskBtn').disabled = true;
+        }
+        
+        // אפשרות להוסיף שחקן בלחיצה על Enter
+        document.getElementById('playerName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addPlayer();
+            }
+        });
+    </script>
+</body>
+</html>

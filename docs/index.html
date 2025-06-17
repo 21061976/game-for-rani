@@ -70,25 +70,26 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
-        .layer-1 { background: linear-gradient(45deg, #ff6b6b, #ee5a52); z-index: 20; }
-        .layer-2 { background: linear-gradient(45deg, #4ecdc4, #44a08d); z-index: 19; }
-        .layer-3 { background: linear-gradient(45deg, #45b7d1, #2980b9); z-index: 18; }
-        .layer-4 { background: linear-gradient(45deg, #f093fb, #f5576c); z-index: 17; }
-        .layer-5 { background: linear-gradient(45deg, #4facfe, #00f2fe); z-index: 16; }
-        .layer-6 { background: linear-gradient(45deg, #43e97b, #38f9d7); z-index: 15; }
-        .layer-7 { background: linear-gradient(45deg, #fa709a, #fee140); z-index: 14; }
-        .layer-8 { background: linear-gradient(45deg, #a8edea, #fed6e3); z-index: 13; }
-        .layer-9 { background: linear-gradient(45deg, #ffecd2, #fcb69f); z-index: 12; }
-        .layer-10 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 11; }
-        .layer-11 { background: linear-gradient(45deg, #96fbc4, #f9f047); z-index: 10; }
-        .layer-12 { background: linear-gradient(45deg, #ffecd2, #fcb69f); z-index: 9; }
-        .layer-13 { background: linear-gradient(45deg, #fccb90, #d57eeb); z-index: 8; }
-        .layer-14 { background: linear-gradient(45deg, #e0c3fc, #9bb5ff); z-index: 7; }
-        .layer-15 { background: linear-gradient(45deg, #fbd3e9, #bb377d); z-index: 6; }
-        .layer-16 { background: linear-gradient(45deg, #89f7fe, #66a6ff); z-index: 5; }
-        .layer-17 { background: linear-gradient(45deg, #fdbb2d, #22c1c3); z-index: 4; }
-        .layer-18 { background: linear-gradient(45deg, #ff9a9e, #fecfef); z-index: 3; }
-        .layer-19 { background: linear-gradient(45deg, #a18cd1, #fbc2eb); z-index: 2; }
+        .layer-1 { background: linear-gradient(45deg, #ff6b6b, #ee5a52); z-index: 28; }
+        .layer-2 { background: linear-gradient(45deg, #4ecdc4, #44a08d); z-index: 27; }
+        .layer-3 { background: linear-gradient(45deg, #45b7d1, #2980b9); z-index: 26; }
+        .layer-4 { background: linear-gradient(45deg, #f093fb, #f5576c); z-index: 25; }
+        .layer-5 { background: linear-gradient(45deg, #4facfe, #00f2fe); z-index: 24; }
+        .layer-6 { background: linear-gradient(45deg, #43e97b, #38f9d7); z-index: 23; }
+        .layer-7 { background: linear-gradient(45deg, #fa709a, #fee140); z-index: 22; }
+        .layer-8 { background: linear-gradient(45deg, #a8edea, #fed6e3); z-index: 21; }
+        .layer-9 { background: linear-gradient(45deg, #ffecd2, #fcb69f); z-index: 20; }
+        .layer-10 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 19; }
+        .layer-11 { background: linear-gradient(45deg, #96fbc4, #f9f047); z-index: 18; }
+        .layer-12 { background: linear-gradient(45deg, #ffecd2, #fcb69f); z-index: 17; }
+        .layer-13 { background: linear-gradient(45deg, #fccb90, #d57eeb); z-index: 16; }
+        .layer-14 { background: linear-gradient(45deg, #e0c3fc, #9bb5ff); z-index: 15; }
+        .layer-15 { background: linear-gradient(45deg, #fbd3e9, #bb377d); z-index: 14; }
+        .layer-16 { background: linear-gradient(45deg, #89f7fe, #66a6ff); z-index: 13; }
+        .layer-17 { background: linear-gradient(45deg, #fdbb2d, #22c1c3); z-index: 12; }
+        .layer-18 { background: linear-gradient(45deg, #ff9a9e, #fecfef); z-index: 11; }
+        .layer-19 { background: linear-gradient(45deg, #a18cd1, #fbc2eb); z-index: 10; }
+        .layer-20 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 9; }
         .layer-21 { background: linear-gradient(45deg, #667eea, #764ba2); z-index: 8; }
         .layer-22 { background: linear-gradient(45deg, #ff9a9e, #fecfef); z-index: 7; }
         .layer-23 { background: linear-gradient(45deg, #a18cd1, #fbc2eb); z-index: 6; }
@@ -100,110 +101,6 @@
         
         .layer-removed {
             animation: tearAway 0.8s ease-out forwards;
-        }
-        
-        .layer-removed {
-            animation: tearAway 0.8s ease-out forwards;
-        }
-        
-        @keyframes tearAway {
-            0% { 
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-            25% { 
-                transform: scale(1.1) rotate(-5deg);
-                opacity: 0.8;
-            }
-            50% { 
-                transform: scale(1.2) rotate(10deg);
-                opacity: 0.6;
-            }
-            75% { 
-                transform: scale(0.5) rotate(-15deg) translateY(-50px);
-                opacity: 0.3;
-            }
-            100% { 
-                transform: scale(0) rotate(45deg) translateY(-100px);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px) rotate(-1deg); }
-            75% { transform: translateX(5px) rotate(1deg); }
-        }
-        
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            z-index: 9999;
-            pointer-events: none;
-        }
-        
-        .confetti.red { background: #ff6b6b; }
-        .confetti.blue { background: #4ecdc4; }
-        .confetti.yellow { background: #feca57; }
-        .confetti.green { background: #48dbfb; }
-        .confetti.purple { background: #ff9ff3; }
-        .confetti.orange { background: #ff9f43; }
-        
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-        
-        .celebration-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0,0,0,0.8);
-            z-index: 9998;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .celebration-text {
-            color: white;
-            font-size: 4em;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-            animation: rainbow 2s infinite;
-        }
-        
-        .celebration-subtext {
-            color: white;
-            font-size: 2em;
-            text-align: center;
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes rainbow {
-            0% { color: #ff6b6b; }
-            16% { color: #4ecdc4; }
-            32% { color: #45b7d1; }
-            48% { color: #f093fb; }
-            64% { color: #4facfe; }
-            80% { color: #43e97b; }
-            100% { color: #ff6b6b; }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
         }
         
         .current-player {
@@ -315,6 +212,33 @@
             font-weight: bold;
         }
         
+        .game-over {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .layer-counter {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
         .player-selection {
             background: linear-gradient(45deg, #ffeaa7, #fab1a0);
             border-radius: 15px;
@@ -359,31 +283,116 @@
             transform: none;
         }
         
-        .game-over {
-            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            font-size: 1.5em;
-            font-weight: bold;
-            margin: 20px 0;
+        .used-players {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
         }
         
-        .layer-counter {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #ff6b6b;
-            color: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        .confetti.red { background: #ff6b6b; }
+        .confetti.blue { background: #4ecdc4; }
+        .confetti.yellow { background: #feca57; }
+        .confetti.green { background: #48dbfb; }
+        .confetti.purple { background: #ff9ff3; }
+        .confetti.orange { background: #ff9f43; }
+        
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            z-index: 9998;
+            display: none;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+        }
+        
+        .celebration-text {
+            color: white;
+            font-size: 4em;
             font-weight: bold;
-            font-size: 1.2em;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-bottom: 20px;
+            animation: rainbow 2s infinite;
+        }
+        
+        .celebration-subtext {
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes tearAway {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            25% { 
+                transform: scale(1.1) rotate(-5deg);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: scale(1.2) rotate(10deg);
+                opacity: 0.6;
+            }
+            75% { 
+                transform: scale(0.5) rotate(-15deg) translateY(-50px);
+                opacity: 0.3;
+            }
+            100% { 
+                transform: scale(0) rotate(45deg) translateY(-100px);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-1deg); }
+            75% { transform: translateX(5px) rotate(1deg); }
+        }
+        
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes rainbow {
+            0% { color: #ff6b6b; }
+            16% { color: #4ecdc4; }
+            32% { color: #45b7d1; }
+            48% { color: #f093fb; }
+            64% { color: #4facfe; }
+            80% { color: #43e97b; }
+            100% { color: #ff6b6b; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
     </style>
 </head>
@@ -397,6 +406,7 @@
                 <h3>הגדרת שחקנים</h3>
                 <input type="text" id="playerName" class="player-input" placeholder="הכנס שם תלמיד">
                 <button onclick="addPlayer()" class="btn btn-primary">הוסף שחקן</button>
+                <button onclick="clearPlayers()" class="btn btn-warning">מחק כל השמות</button>
                 <div id="playerList" class="player-list"></div>
                 <button onclick="startGame()" class="btn btn-success" id="startBtn" disabled>התחל משחק!</button>
             </div>
@@ -404,7 +414,7 @@
         
         <div id="game-phase" style="display: none;">
             <div class="instructions">
-                לחץ על החבילה כדי לפתוח שכבה ולגלות את המשימה!
+                לחץ על החבילה כדי לפתוח שכבה ולגלות את ההיגד!
             </div>
             
             <div class="current-player" id="currentPlayer"></div>
@@ -446,13 +456,12 @@
             </div>
             
             <div class="player-selection" id="playerSelection">
-                <h3>עכשיו תור של <span id="currentPlayerName"></span> לבחור למי להעביר את החבילה!</h3>
+                <h3><span id="currentPlayerName"></span> קרא/י את המשימה ובחר/י למי להעביר את החבילה!</h3>
                 <div class="player-buttons" id="playerButtons"></div>
                 <div class="used-players" id="usedPlayers"></div>
             </div>
             
             <div class="controls">
-                <button onclick="finishTask()" class="btn btn-success" id="finishTaskBtn" disabled>סיימתי את המשימה!</button>
                 <button onclick="resetGame()" class="btn btn-warning">איפוס משחק</button>
             </div>
         </div>
@@ -515,6 +524,12 @@
             }
         }
         
+        function clearPlayers() {
+            players = [];
+            updatePlayerList();
+            document.getElementById('startBtn').disabled = true;
+        }
+        
         function updatePlayerList() {
             const playerList = document.getElementById('playerList');
             playerList.innerHTML = players.map(player => 
@@ -526,7 +541,7 @@
             if (players.length < 2) return;
             
             gameStarted = true;
-            usedPlayers = []; // איפוס רשימת השחקנים שכבר שיחקו
+            usedPlayers = [];
             document.getElementById('setup-phase').style.display = 'none';
             document.getElementById('game-phase').style.display = 'block';
             updateCurrentPlayer();
@@ -536,7 +551,6 @@
             const currentPlayerDiv = document.getElementById('currentPlayer');
             currentPlayerDiv.textContent = `תור של: ${players[currentPlayerIndex]}`;
             
-            // הוספת השחקן הנוכחי לרשימת השחקנים ששיחקו
             if (!usedPlayers.includes(players[currentPlayerIndex])) {
                 usedPlayers.push(players[currentPlayerIndex]);
             }
@@ -554,18 +568,15 @@
         function openLayer() {
             if (!gameStarted || currentLayer > 28 || taskCompleted) return;
             
-            // הסרת השכבה הנוכחית עם אפקט קריעה
             const layer = document.getElementById(`layer${currentLayer}`);
             if (layer) layer.classList.add('layer-removed');
             
-            // הוספת רעידה לחבילה
             const packageContainer = document.querySelector('.package-container');
             packageContainer.style.animation = 'shake 0.5s ease-in-out';
             setTimeout(() => {
                 packageContainer.style.animation = '';
             }, 500);
             
-            // הצגת המשימה
             const taskDisplay = document.getElementById('taskDisplay');
             if (currentLayer <= tasks.length) {
                 taskDisplay.textContent = tasks[currentLayer - 1];
@@ -577,36 +588,26 @@
                 taskDisplay.textContent = "🎁 מצאת את המתנה! כל הכבוד!";
             }
             
-            // עדכון מונה השכבות
             const layerCounter = document.getElementById('layerCounter');
             layerCounter.textContent = 28 - currentLayer;
             
-            // בדיקה אם זו המשימה האחרונה - הפעלת קונפטי!
             if (currentLayer === 28) {
                 setTimeout(() => {
                     startConfettiCelebration();
                 }, 1000);
+            } else {
+                setTimeout(() => {
+                    showPlayerSelection();
+                }, 1000);
             }
-            
-            // הפעלת כפתור "סיימתי את המשימה"
-            document.getElementById('finishTaskBtn').disabled = false;
-            taskCompleted = true;
             
             currentLayer++;
             
-            // בדיקה אם המשחק נגמר
             if (currentLayer > 28) {
                 setTimeout(() => {
                     document.getElementById('game-phase').style.display = 'none';
                     document.getElementById('game-over').style.display = 'block';
-                }, 3000);
-            }
-        }
-        
-        function finishTask() {
-            // הצגת בחירת השחקן הבא
-            if (currentLayer <= 28) {
-                showPlayerSelection();
+                }, 4000);
             }
         }
         
@@ -618,60 +619,43 @@
             currentPlayerName.textContent = players[currentPlayerIndex];
             playerSelection.style.display = 'block';
             
-            // יצירת כפתורים לכל השחקנים (חוץ מהשחקן הנוכחי)
             const availablePlayers = players.filter((player, index) => index !== currentPlayerIndex);
             
             playerButtons.innerHTML = availablePlayers.map(player => 
                 `<button class="player-btn" onclick="selectNextPlayer('${player}')">${player}</button>`
             ).join('');
-            
-            document.getElementById('finishTaskBtn').disabled = true;
         }
         
         function selectNextPlayer(selectedPlayer) {
-            // מציאת האינדקס של השחקן שנבחר
             currentPlayerIndex = players.indexOf(selectedPlayer);
-            
-            // הסתרת בחירת השחקן
             document.getElementById('playerSelection').style.display = 'none';
-            
-            // עדכון השחקן הנוכחי
             updateCurrentPlayer();
-            
-            // איפוס המשימה
             taskCompleted = false;
             document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי לפתוח את השכבה הבאה!';
         }
         
         function resetGame() {
-            // איפוס כל המשתנים
             currentLayer = 1;
             currentPlayerIndex = 0;
             gameStarted = false;
             usedPlayers = [];
             taskCompleted = false;
             
-            // איפוס הממשק
             document.getElementById('setup-phase').style.display = 'block';
             document.getElementById('game-phase').style.display = 'none';
             document.getElementById('game-over').style.display = 'none';
             document.getElementById('playerSelection').style.display = 'none';
             
-            // איפוס השכבות
             for (let i = 1; i <= 28; i++) {
                 const layer = document.getElementById(`layer${i}`);
                 if (layer) layer.classList.remove('layer-removed');
             }
             
-            // איפוס הטקסטים
             document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי להתחיל!';
             document.getElementById('layerCounter').textContent = '28';
-            document.getElementById('finishTaskBtn').disabled = true;
         }
-        
-        
+
         function startConfettiCelebration() {
-            // יצירת אוברליי חגיגה
             const overlay = document.createElement('div');
             overlay.className = 'celebration-overlay';
             overlay.style.display = 'flex';
@@ -681,7 +665,6 @@
             `;
             document.body.appendChild(overlay);
             
-            // יצירת קונפטי
             const colors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange'];
             
             for (let i = 0; i < 100; i++) {
@@ -693,20 +676,17 @@
                     confetti.style.animation = `confetti-fall ${confetti.style.animationDuration} linear`;
                     document.body.appendChild(confetti);
                     
-                    // מחיקת הקונפטי אחרי שנופל
                     setTimeout(() => {
                         confetti.remove();
                     }, 5000);
                 }, i * 50);
             }
             
-            // הסרת האוברליי אחרי 4 שניות
             setTimeout(() => {
                 overlay.remove();
             }, 4000);
         }
         
-        // אפשרות להוסיף שחקן בלחיצה על Enter
         document.getElementById('playerName').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 addPlayer();

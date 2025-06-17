@@ -466,9 +466,9 @@
             </div>
             
             <div class="player-selection" id="playerSelection">
-                <h3>📋 <span id="currentPlayerName"></span> קרא/י את המשימה ובחר/י למי להעביר את החבילה!</h3>
+                <h3>📋 <span id="currentPlayerName"></span> בחר/י למי להעביר את החבילה!</h3>
                 <div class="instructions" style="margin: 15px 0; font-size: 1em;">
-                    💡 בחר/י את התלמיד/ה שהכי מתאים/ה לתיאור במשימה
+                    💡 בחר/י את התלמיד/ה שהכי מתאים/ה למשימה שקראת
                 </div>
                 <div class="player-buttons" id="playerButtons"></div>
                 <div class="used-players" id="usedPlayers"></div>
@@ -586,10 +586,17 @@
                 // הסרת השכבה עם אפקט קריעה
                 layer.classList.add('layer-removed');
                 
-                // תמיד להציג בחירת שחקנים (גם עבור השכבה הראשונה)
-                setTimeout(() => {
-                    showPlayerSelection();
-                }, 1000);
+                // אם זו השכבה האחרונה - הפעלת קונפטי
+                if (currentLayer === 29) {
+                    setTimeout(() => {
+                        startConfettiCelebration();
+                    }, 1000);
+                } else {
+                    // עבור כל השכבות האחרות - הצגת בחירת שחקנים
+                    setTimeout(() => {
+                        showPlayerSelection();
+                    }, 1000);
+                }
             }
             
             const packageContainer = document.querySelector('.package-container');
@@ -600,12 +607,6 @@
             
             const layerCounter = document.getElementById('layerCounter');
             layerCounter.textContent = 29 - currentLayer;
-            
-            if (currentLayer === 29) {
-                setTimeout(() => {
-                    startConfettiCelebration();
-                }, 1000);
-            }
             
             currentLayer++;
             

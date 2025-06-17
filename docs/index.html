@@ -46,10 +46,18 @@
             margin: 0 auto 30px;
             cursor: pointer;
             transition: transform 0.3s ease;
+            border: 3px dashed #667eea;
+            animation: pulse-border 2s infinite;
         }
         
         .package-container:hover {
             transform: scale(1.05);
+            border-color: #ff6b6b;
+        }
+        
+        @keyframes pulse-border {
+            0%, 100% { border-color: #667eea; }
+            50% { border-color: #ff6b6b; }
         }
         
         .package-layer {
@@ -255,20 +263,24 @@
         .player-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
+            max-width: 100%;
         }
         
         .player-btn {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 15px 25px;
+            border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1.1em;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            min-width: 120px;
+            text-align: center;
         }
         
         .player-btn:hover {
@@ -403,75 +415,78 @@
         
         <div id="setup-phase">
             <div class="player-setup">
-                <h3>הגדרת שחקנים</h3>
-                <input type="text" id="playerName" class="player-input" placeholder="הכנס שם תלמיד">
-                <button onclick="addPlayer()" class="btn btn-primary">הוסף שחקן</button>
-                <button onclick="clearPlayers()" class="btn btn-warning">מחק כל השמות</button>
+                <h3>הגדרת שחקנים/ות</h3>
+                <input type="text" id="playerName" class="player-input" placeholder="הכנס/י שם תלמיד/ה">
+                <button onclick="addPlayer()" class="btn btn-primary">הוסף/י שחקן/ת</button>
+                <button onclick="clearPlayers()" class="btn btn-warning">מחק/י כל השמות</button>
                 <div id="playerList" class="player-list"></div>
-                <button onclick="startGame()" class="btn btn-success" id="startBtn" disabled>התחל משחק!</button>
+                <button onclick="startGame()" class="btn btn-success" id="startBtn" disabled>התחל/י משחק!</button>
             </div>
         </div>
         
         <div id="game-phase" style="display: none;">
-            <div class="instructions">
-                לחץ על החבילה כדי לפתוח שכבה ולגלות את ההיגד!
-            </div>
-            
             <div class="current-player" id="currentPlayer"></div>
+            
+            <div class="instructions">
+                👇 לחץ/י על החבילה כדי לפתוח שכבה ולגלות את המשימה! 👇
+            </div>
             
             <div class="package-container" onclick="openLayer()">
                 <div class="layer-counter" id="layerCounter">28</div>
-                <div class="package-layer layer-1" id="layer1">שכבה 1</div>
-                <div class="package-layer layer-2" id="layer2">שכבה 2</div>
-                <div class="package-layer layer-3" id="layer3">שכבה 3</div>
-                <div class="package-layer layer-4" id="layer4">שכבה 4</div>
-                <div class="package-layer layer-5" id="layer5">שכבה 5</div>
-                <div class="package-layer layer-6" id="layer6">שכבה 6</div>
-                <div class="package-layer layer-7" id="layer7">שכבה 7</div>
-                <div class="package-layer layer-8" id="layer8">שכבה 8</div>
-                <div class="package-layer layer-9" id="layer9">שכבה 9</div>
-                <div class="package-layer layer-10" id="layer10">שכבה 10</div>
-                <div class="package-layer layer-11" id="layer11">שכבה 11</div>
-                <div class="package-layer layer-12" id="layer12">שכבה 12</div>
-                <div class="package-layer layer-13" id="layer13">שכבה 13</div>
-                <div class="package-layer layer-14" id="layer14">שכבה 14</div>
-                <div class="package-layer layer-15" id="layer15">שכבה 15</div>
-                <div class="package-layer layer-16" id="layer16">שכבה 16</div>
-                <div class="package-layer layer-17" id="layer17">שכבה 17</div>
-                <div class="package-layer layer-18" id="layer18">שכבה 18</div>
-                <div class="package-layer layer-19" id="layer19">שכבה 19</div>
-                <div class="package-layer layer-20" id="layer20">שכבה 20</div>
-                <div class="package-layer layer-21" id="layer21">שכבה 21</div>
-                <div class="package-layer layer-22" id="layer22">שכבה 22</div>
-                <div class="package-layer layer-23" id="layer23">שכבה 23</div>
-                <div class="package-layer layer-24" id="layer24">שכבה 24</div>
-                <div class="package-layer layer-25" id="layer25">שכבה 25</div>
-                <div class="package-layer layer-26" id="layer26">שכבה 26</div>
-                <div class="package-layer layer-27" id="layer27">שכבה 27</div>
-                <div class="package-layer layer-28" id="layer28">🎁 מתנה!</div>
+                <div class="package-layer layer-1" id="layer1">שלח/י את החבילה עוברת לתלמיד/ה שמאחר/ת באופן קבוע לבית הספר</div>
+                <div class="package-layer layer-2" id="layer2">שלח/י את החבילה עוברת לתלמיד/ה שמתארגן/ת הכי מהר לשיעורים</div>
+                <div class="package-layer layer-3" id="layer3">שלח/י את החבילה עוברת לתלמיד/ה שמצחיק/ה את הכיתה לעיתים קרובות</div>
+                <div class="package-layer layer-4" id="layer4">שלח/י את החבילה עוברת לתלמיד/ה שמתלבש/ת בסטייל אופנתי</div>
+                <div class="package-layer layer-5" id="layer5">שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע לצאת מהשיעור...</div>
+                <div class="package-layer layer-6" id="layer6">שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע מהמורה שיעור חופשי</div>
+                <div class="package-layer layer-7" id="layer7">שלח/י את החבילה עוברת לתלמיד/ה הכי חרוץ/ה בכיתה</div>
+                <div class="package-layer layer-8" id="layer8">שלח/י את החבילה עוברת לתלמיד/ה שמציע/ה ויוזם/ת מפגשי גיבוש כיתתיים</div>
+                <div class="package-layer layer-9" id="layer9">שלח/י את החבילה עוברת לתלמיד/ה שמגיע/ה ראשון/ה בבוקר לכיתה</div>
+                <div class="package-layer layer-10" id="layer10">שלח/י את החבילה עוברת לתלמיד/ה שמגלה יכולות וכישורים בשיעורי ספורט</div>
+                <div class="package-layer layer-11" id="layer11">שלח/י את החבילה עוברת לתלמיד/ה שמפטפט/ת לעיתים קרובות בשיעורים...</div>
+                <div class="package-layer layer-12" id="layer12">שלח/י את החבילה עוברת לתלמיד/ה פעיל/ה חברתית או מעורב/ת בפעילויות חברתיות בבית הספר</div>
+                <div class="package-layer layer-13" id="layer13">שלח/י את החבילה עוברת לתלמיד/ה שכל הזמן צמוד/ה לטלפון שלו/ה</div>
+                <div class="package-layer layer-14" id="layer14">שלח/י את החבילה עוברת לתלמיד/ה שדואג/ת לשמור על ניקיון הכיתה</div>
+                <div class="package-layer layer-15" id="layer15">שלח/י את החבילה עוברת לתלמיד/ה שתמיד עוזר/ת לתלמידים אחרים בכיתה</div>
+                <div class="package-layer layer-16" id="layer16">שלח/י את החבילה עוברת לתלמיד/ה שלא החסיר/ה יום אחד מבית הספר</div>
+                <div class="package-layer layer-17" id="layer17">שלח/י את החבילה עוברת לתלמיד/ה עם המוטיבציה הכי גבוהה ללמידה</div>
+                <div class="package-layer layer-18" id="layer18">שלח/י את החבילה עוברת לתלמיד/ה האחראי/ת ביותר בכיתה...</div>
+                <div class="package-layer layer-19" id="layer19">שלח/י את החבילה עוברת לתלמיד/ה שלא מפספס/ת אף הודעה של המחנכת</div>
+                <div class="package-layer layer-20" id="layer20">שלח/י את החבילה עוברת לתלמיד/ה שמאוד פעיל/ה בקבוצת הווטסאפ הכיתתית</div>
+                <div class="package-layer layer-21" id="layer21">שלח/י את החבילה עוברת לתלמיד/ה הכי גדול/ה בגיל בכיתה</div>
+                <div class="package-layer layer-22" id="layer22">שלח/י את החבילה עוברת לתלמיד/ה שתמיד יש לו/ה את כל הציוד הדרוש בתיק</div>
+                <div class="package-layer layer-23" id="layer23">שלח/י את החבילה עוברת לתלמיד/ה בעל/ת נתינה באופן תמידי</div>
+                <div class="package-layer layer-24" id="layer24">שלח/י את החבילה עוברת לתלמיד/ה שתמיד שואל/ת למי יש עט עיפרון או חודים 0.5?</div>
+                <div class="package-layer layer-25" id="layer25">שלח/י את החבילה עוברת לתלמיד/ה שמכיר/ה את כל הסדרות בנטפליקס ויכול/ה להמליץ איזו סדרה לצפות</div>
+                <div class="package-layer layer-26" id="layer26">שלח/י את החבילה עוברת לתלמיד/ה שתמיד נותן/ת עצות חכמות וטובות</div>
+                <div class="package-layer layer-27" id="layer27">שלח/י את החבילה עוברת לתלמיד/ה שאף פעם לא צועק/ת בכיתה</div>
+                <div class="package-layer layer-28" id="layer28">🎉 שלח/י את הקונפטי שבחבילה עוברת לכל תלמידי/ות הכיתה! 🎊</div>
             </div>
             
             <div class="task-display" id="taskDisplay">
-                לחץ על החבילה כדי להתחיל!
+                👆 לחץ/י על החבילה למעלה כדי להתחיל את המשחק! 👆
             </div>
             
             <div class="player-selection" id="playerSelection">
-                <h3><span id="currentPlayerName"></span> קרא/י את המשימה ובחר/י למי להעביר את החבילה!</h3>
+                <h3>📋 <span id="currentPlayerName"></span> קרא/י את המשימה ובחר/י למי להעביר את החבילה!</h3>
+                <div class="instructions" style="margin: 15px 0; font-size: 1em;">
+                    💡 בחר/י את התלמיד/ה שהכי מתאים/ה לתיאור במשימה
+                </div>
                 <div class="player-buttons" id="playerButtons"></div>
                 <div class="used-players" id="usedPlayers"></div>
             </div>
             
             <div class="controls">
-                <button onclick="resetGame()" class="btn btn-warning">איפוס משחק</button>
+                <button onclick="resetGame()" class="btn btn-warning">🔄 התחל/י משחק חדש</button>
             </div>
         </div>
         
         <div id="game-over" style="display: none;">
             <div class="game-over">
                 🎉 המשחק הסתיים! 🎉<br>
-                כל הכבוד לכל השחקנים!
+                כל הכבוד לכל השחקנים/ות!
             </div>
-            <button onclick="resetGame()" class="btn btn-primary">משחק חדש</button>
+            <button onclick="resetGame()" class="btn btn-primary">התחל/י משחק חדש</button>
         </div>
     </div>
 
@@ -484,34 +499,34 @@
         let taskCompleted = false;
         
         const tasks = [
-            "שלח את החבילה עוברת לתלמיד/ה שמאחר/ת באופן קבוע לבית הספר",
-            "שלח את החבילה עוברת לתלמיד/ה שמתארגן/ת הכי מהר לשיעורים",
-            "שלח את החבילה עוברת לתלמיד/ה שמצחיק/ה את הכיתה לעיתים קרובות",
-            "שלח את החבילה עוברת לתלמיד/ה שמתלבש/ת בסטייל אופנתי",
-            "שלח את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע לצאת מהשיעור...",
-            "שלח את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע מהמורה שיעור חופשי",
-            "שלח את החבילה עוברת לתלמיד/ה הכי חרוץ/ה בכיתה",
-            "שלח את החבילה עוברת לתלמיד/ה שמציע/ה ויוזם/ת מפגשי גיבוש כיתתיים",
-            "שלח את החבילה עוברת לתלמיד/ה שמגיע/ה ראשון בבוקר לכיתה",
-            "שלח את החבילה עוברת לתלמיד/ה שמגלה יכולות וכישורים בשיעורי ספורט",
-            "שלח את החבילה עוברת לתלמיד/ה שמפטפט/ת לעיתים קרובות בשיעורים...",
-            "שלח את החבילה עוברת לתלמיד/ה פעיל/ה חברתית או מעורב בפעילויות חברתיות בבית הספר",
-            "שלח את החבילה עוברת לתלמיד/ה שכל הזמן צמוד לטלפון שלו/ה",
-            "שלח את החבילה עוברת לתלמיד/ה שדואג/ת לשמור על ניקיון הכיתה",
-            "שלח את החבילה עוברת לתלמיד/ה שתמיד עוזר/ת לתלמידים אחרים בכיתה",
-            "שלח את החבילה עוברת לתלמיד/ה שלא החסיר/ה יום אחד מבית הספר",
-            "שלח את החבילה עוברת לתלמיד/ה עם המוטיבציה הכי גבוהה ללמידה",
-            "שלח את החבילה עוברת לתלמיד/ה האחראי/ת ביותר בכיתה...",
-            "שלח את החבילה עוברת לתלמיד/ה שלא מפספס אף הודעה של המחנכת",
-            "שלח את החבילה עוברת לתלמיד/ה שמאוד פעיל/ה בקבוצת הווטסאפ הכיתתית",
-            "שלח את החבילה עוברת לתלמיד/ה הכי גדול בגיל בכיתה",
-            "שלח את החבילה עוברת לתלמיד/ה שתמיד יש לו את כל הציוד הדרוש בתיק",
-            "שלח את החבילה עוברת לתלמיד/ה בעל/ת נתינה באופן תמידי",
-            "שלח את החבילה עוברת לתלמיד/ה שתמיד שואל או שואלת למי יש עט עיפרון או חודים 0.5?",
-            "שלח את החבילה עוברת לתלמיד/ה שמכיר/ה את כל הסדרות בנטפליקס ויכול/ה להמליץ איזו סדרה לצפות",
-            "שלח את החבילה עוברת לתלמיד/ה שתמיד נותן/ת עצות חכמות וטובות",
-            "שלח את החבילה עוברת לתלמיד/ה שאף פעם לא צועק בכיתה",
-            "🎉 שלח את הקונפטי שבחבילה עוברת לכל תלמידי הכיתה! 🎊"
+            "שלח/י את החבילה עוברת לתלמיד/ה שמאחר/ת באופן קבוע לבית הספר",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמתארגן/ת הכי מהר לשיעורים",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמצחיק/ה את הכיתה לעיתים קרובות",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמתלבש/ת בסטייל אופנתי",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע לצאת מהשיעור...",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע מהמורה שיעור חופשי",
+            "שלח/י את החבילה עוברת לתלמיד/ה הכי חרוץ/ה בכיתה",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמציע/ה ויוזם/ת מפגשי גיבוש כיתתיים",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמגיע/ה ראשון/ה בבוקר לכיתה",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמגלה יכולות וכישורים בשיעורי ספורט",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמפטפט/ת לעיתים קרובות בשיעורים...",
+            "שלח/י את החבילה עוברת לתלמיד/ה פעיל/ה חברתית או מעורב/ת בפעילויות חברתיות בבית הספר",
+            "שלח/י את החבילה עוברת לתלמיד/ה שכל הזמן צמוד/ה לטלפון שלו/ה",
+            "שלח/י את החבילה עוברת לתלמיד/ה שדואג/ת לשמור על ניקיון הכיתה",
+            "שלח/י את החבילה עוברת לתלמיד/ה שתמיד עוזר/ת לתלמידים אחרים בכיתה",
+            "שלח/י את החבילה עוברת לתלמיד/ה שלא החסיר/ה יום אחד מבית הספר",
+            "שלח/י את החבילה עוברת לתלמיד/ה עם המוטיבציה הכי גבוהה ללמידה",
+            "שלח/י את החבילה עוברת לתלמיד/ה האחראי/ת ביותר בכיתה...",
+            "שלח/י את החבילה עוברת לתלמיד/ה שלא מפספס/ת אף הודעה של המחנכת",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמאוד פעיל/ה בקבוצת הווטסאפ הכיתתית",
+            "שלח/י את החבילה עוברת לתלמיד/ה הכי גדול/ה בגיל בכיתה",
+            "שלח/י את החבילה עוברת לתלמיד/ה שתמיד יש לו/ה את כל הציוד הדרוש בתיק",
+            "שלח/י את החבילה עוברת לתלמיד/ה בעל/ת נתינה באופן תמידי",
+            "שלח/י את החבילה עוברת לתלמיד/ה שתמיד שואל/ת למי יש עט עיפרון או חודים 0.5?",
+            "שלח/י את החבילה עוברת לתלמיד/ה שמכיר/ה את כל הסדרות בנטפליקס ויכול/ה להמליץ איזו סדרה לצפות",
+            "שלח/י את החבילה עוברת לתלמיד/ה שתמיד נותן/ת עצות חכמות וטובות",
+            "שלח/י את החבילה עוברת לתלמיד/ה שאף פעם לא צועק/ת בכיתה",
+            "🎉 שלח/י את הקונפטי שבחבילה עוברת לכל תלמידי הכיתה! 🎊"
         ];
         
         function addPlayer() {
@@ -561,7 +576,7 @@
         function updateUsedPlayersList() {
             const usedPlayersDiv = document.getElementById('usedPlayers');
             if (usedPlayers.length > 0) {
-                usedPlayersDiv.textContent = `שחקנים ששיחקו כבר: ${usedPlayers.join(', ')}`;
+                usedPlayersDiv.textContent = `שחקנים/ות ששיחקו כבר: ${usedPlayers.join(', ')}`;
             }
         }
         
@@ -569,24 +584,24 @@
             if (!gameStarted || currentLayer > 28 || taskCompleted) return;
             
             const layer = document.getElementById(`layer${currentLayer}`);
-            if (layer) layer.classList.add('layer-removed');
+            if (layer) {
+                // הצגת המשימה של השכבה הנוכחית
+                const taskDisplay = document.getElementById('taskDisplay');
+                taskDisplay.textContent = layer.textContent;
+                taskDisplay.style.animation = 'bounce 0.8s ease-out';
+                setTimeout(() => {
+                    taskDisplay.style.animation = '';
+                }, 800);
+                
+                // הסרת השכבה עם אפקט קריעה
+                layer.classList.add('layer-removed');
+            }
             
             const packageContainer = document.querySelector('.package-container');
             packageContainer.style.animation = 'shake 0.5s ease-in-out';
             setTimeout(() => {
                 packageContainer.style.animation = '';
             }, 500);
-            
-            const taskDisplay = document.getElementById('taskDisplay');
-            if (currentLayer <= tasks.length) {
-                taskDisplay.textContent = tasks[currentLayer - 1];
-                taskDisplay.style.animation = 'bounce 0.8s ease-out';
-                setTimeout(() => {
-                    taskDisplay.style.animation = '';
-                }, 800);
-            } else {
-                taskDisplay.textContent = "🎁 מצאת את המתנה! כל הכבוד!";
-            }
             
             const layerCounter = document.getElementById('layerCounter');
             layerCounter.textContent = 28 - currentLayer;
@@ -631,7 +646,7 @@
             document.getElementById('playerSelection').style.display = 'none';
             updateCurrentPlayer();
             taskCompleted = false;
-            document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי לפתוח את השכבה הבאה!';
+            document.getElementById('taskDisplay').textContent = '👆 לחץ/י על החבילה למעלה כדי לפתוח את השכבה הבאה! 👆';
         }
         
         function resetGame() {
@@ -651,7 +666,7 @@
                 if (layer) layer.classList.remove('layer-removed');
             }
             
-            document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי להתחיל!';
+            document.getElementById('taskDisplay').textContent = '👆 לחץ/י על החבילה למעלה כדי להתחיל את המשחק! 👆';
             document.getElementById('layerCounter').textContent = '28';
         }
 
@@ -661,7 +676,7 @@
             overlay.style.display = 'flex';
             overlay.innerHTML = `
                 <div class="celebration-text">🎉 כל הכבוד לכיתה! 🎊</div>
-                <div class="celebration-subtext">סיימתם את כל המשימות!</div>
+                <div class="celebration-subtext">סיימתם/ן את כל המשימות!</div>
             `;
             document.body.appendChild(overlay);
             

@@ -62,7 +62,7 @@
             height: 100%;
             border-radius: 20px;
             display: flex;
-            flex-direction: column; /* Changed for better task layout */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-size: 1.5em;
@@ -101,7 +101,6 @@
         .layer-25 { background: linear-gradient(45deg, #ff8a80, #ffb74d); z-index: 4; }
         .layer-26 { background: linear-gradient(45deg, #81c784, #aed581); z-index: 3; }
         .layer-27 { background: linear-gradient(45deg, #64b5f6, #42a5f5); z-index: 2; }
-        /* Removed duplicate .layer-28 */
         .layer-28 { background: linear-gradient(45deg, #ffd54f, #ffecb3); z-index: 1; }
         .layer-29 { background: linear-gradient(45deg, #fccb90, #d57eeb); z-index: 0; }
         
@@ -131,6 +130,7 @@
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
         .btn {
             padding: 12px 25px;
@@ -336,7 +336,7 @@
 
         <div id="game-phase" style="display: none;">
             <div class="current-player" id="currentPlayer"></div>
-            <div class="instructions">👇 לחץ/י על החבילה כדי לפתוח שכבה ולגלות את המשימה! 👇</div>
+            <div class="instructions" id="mainInstructions">👇 לחץ/י על החבילה כדי לפתוח שכבה ולגלות את המשימה! 👇</div>
 
             <div class="package-container" id="packageContainer">
                 <div class="layer-counter" id="layerCounter">29</div>
@@ -390,46 +390,21 @@
     </div>
 
 <script>
+    // --- State Variables ---
     let players = [];
     let currentPlayerIndex = 0;
     let currentLayer = 1;
     const totalLayers = 29;
     let gameStarted = false;
     let usedPlayers = [];
-    let isActionInProgress = false; // Prevents multiple clicks
+    let isActionInProgress = false; 
+    let layerToShowTask = null; // NEW: Keep track of the layer showing the task
 
-    // --- FIX: Trimmed the tasks array to the correct length (27 tasks for layers 2-28) ---
     const tasks = [
-        "שלח/י את החבילה עוברת לתלמיד/ה שמאחר/ת באופן קבוע לבית הספר",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמתארגן/ת הכי מהר לשיעורים",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמצחיק/ה את הכיתה לעיתים קרובות",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמתלבש/ת בסטייל אופנתי",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע לצאת מהשיעור...",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע מהמורה שיעור חופשי",
-        "שלח/י את החבילה עוברת לתלמיד/ה הכי חרוץ/ה בכיתה",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמציע/ה ויוזם/ת מפגשי גיבוש כיתתיים",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמגיע/ה ראשון/ה בבוקר לכיתה",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמגלה יכולות וכישורים בשיעורי ספורט",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמפטפט/ת לעיתים קרובות בשיעורים...",
-        "שלח/י את החבילה עוברת לתלמיד/ה פעיל/ה חברתית או מעורב/ת בפעילויות חברתיות בבית הספר",
-        "שלח/י את החבילה עוברת לתלמיד/ה שכל הזמן צמוד/ה לטלפון שלו/ה",
-        "שלח/י את החבילה עוברת לתלמיד/ה שדואג/ת לשמור על ניקיון הכיתה",
-        "שלח/י את החבילה עוברת לתלמיד/ה שתמיד עוזר/ת לתלמידים אחרים בכיתה",
-        "שלח/י את החבילה עוברת לתלמיד/ה שלא החסיר/ה יום אחד מבית הספר",
-        "שלח/י את החבילה עוברת לתלמיד/ה עם המוטיבציה הכי גבוהה ללמידה",
-        "שלח/י את החבילה עוברת לתלמיד/ה האחראי/ת ביותר בכיתה...",
-        "שלח/י את החבילה עוברת לתלמיד/ה שלא מפספס/ת אף הודעה של המחנכת",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמאוד פעיל/ה בקבוצת הווטסאפ הכיתתית",
-        "שלח/י את החבילה עוברת לתלמיד/ה הכי גדול/ה בגיל בכיתה",
-        "שלח/י את החבילה עוברת לתלמיד/ה שתמיד יש לו/ה את כל הציוד הדרוש בתיק",
-        "שלח/י את החבילה עוברת לתלמיד/ה בעל/ת נתינה באופן תמידי",
-        "שלח/י את החבילה עוברת לתלמיד/ה שתמיד שואל/ת למי יש עט עיפרון או חודים 0.5?",
-        "שלח/י את החבילה עוברת לתלמיד/ה שמכיר/ה את כל הסדרות בנטפליקס ויכול/ה להמליץ איזו סדרה לצפות",
-        "שלח/י את החבילה עוברת לתלמיד/ה שתמיד נותן/ת עצות חכמות וטובות",
-        "שלח/י את החבילה עוברת לתלמיד/ה שאף פעם לא צועק/ת בכיתה"
-        // Last task was removed as it was unused. The final layer is the prize.
+        "שלח/י את החבילה עוברת לתלמיד/ה שמאחר/ת באופן קבוע לבית הספר", "שלח/י את החבילה עוברת לתלמיד/ה שמתארגן/ת הכי מהר לשיעורים", "שלח/י את החבילה עוברת לתלמיד/ה שמצחיק/ה את הכיתה לעיתים קרובות", "שלח/י את החבילה עוברת לתלמיד/ה שמתלבש/ת בסטייל אופנתי", "שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע לצאת מהשיעור...", "שלח/י את החבילה עוברת לתלמיד/ה שמבקש/ת באופן קבוע מהמורה שיעור חופשי", "שלח/י את החבילה עוברת לתלמיד/ה הכי חרוץ/ה בכיתה", "שלח/י את החבילה עוברת לתלמיד/ה שמציע/ה ויוזם/ת מפגשי גיבוש כיתתיים", "שלח/י את החבילה עוברת לתלמיד/ה שמגיע/ה ראשון/ה בבוקר לכיתה", "שלח/י את החבילה עוברת לתלמיד/ה שמגלה יכולות וכישורים בשיעורי ספורט", "שלח/י את החבילה עוברת לתלמיד/ה שמפטפט/ת לעיתים קרובות בשיעורים...", "שלח/י את החבילה עוברת לתלמיד/ה פעיל/ה חברתית או מעורב/ת בפעילויות חברתיות בבית הספר", "שלח/י את החבילה עוברת לתלמיד/ה שכל הזמן צמוד/ה לטלפון שלו/ה", "שלח/י את החבילה עוברת לתלמיד/ה שדואג/ת לשמור על ניקיון הכיתה", "שלח/י את החבילה עוברת לתלמיד/ה שתמיד עוזר/ת לתלמידים אחרים בכיתה", "שלח/י את החבילה עוברת לתלמיד/ה שלא החסיר/ה יום אחד מבית הספר", "שלח/י את החבילה עוברת לתלמיד/ה עם המוטיבציה הכי גבוהה ללמידה", "שלח/י את החבילה עוברת לתלמיד/ה האחראי/ת ביותר בכיתה...", "שלח/י את החבילה עוברת לתלמיד/ה שלא מפספס/ת אף הודעה של המחנכת", "שלח/י את החבילה עוברת לתלמיד/ה שמאוד פעיל/ה בקבוצת הווטסאפ הכיתתית", "שלח/י את החבילה עוברת לתלמיד/ה הכי גדול/ה בגיל בכיתה", "שלח/י את החבילה עוברת לתלמיד/ה שתמיד יש לו/ה את כל הציוד הדרוש בתיק", "שלח/י את החבילה עוברת לתלמיד/ה בעל/ת נתינה באופן תמידי", "שלח/י את החבילה עוברת לתלמיד/ה שתמיד שואל/ת למי יש עט עיפרון או חודים 0.5?", "שלח/י את החבילה עוברת לתלמיד/ה שמכיר/ה את כל הסדרות בנטפליקס ויכול/ה להמליץ איזו סדרה לצפות", "שלח/י את החבילה עוברת לתלמיד/ה שתמיד נותן/ת עצות חכמות וטובות", "שלח/י את החבילה עוברת לתלמיד/ה שאף פעם לא צועק/ת בכיתה"
     ];
 
+    // --- Setup Functions ---
     function addPlayer() {
         const playerNameInput = document.getElementById('playerName');
         const playerName = playerNameInput.value.trim();
@@ -448,19 +423,18 @@
     }
 
     function updatePlayerList() {
-        const playerList = document.getElementById('playerList');
-        playerList.innerHTML = players.map(player => `<span class="player-tag">${player}</span>`).join('');
+        document.getElementById('playerList').innerHTML = players.map(p => `<span class="player-tag">${p}</span>`).join('');
     }
 
     function startGame() {
         if (players.length < 2) return;
         gameStarted = true;
-        usedPlayers = [];
         document.getElementById('setup-phase').style.display = 'none';
         document.getElementById('game-phase').style.display = 'block';
         updateCurrentPlayer();
     }
 
+    // --- Game Logic Functions ---
     function updateCurrentPlayer() {
         const currentPlayerDiv = document.getElementById('currentPlayer');
         currentPlayerDiv.textContent = `תור של: ${players[currentPlayerIndex]}`;
@@ -475,45 +449,34 @@
         usedPlayersDiv.textContent = usedPlayers.length > 0 ? `שחקנים/ות ששיחקו כבר: ${usedPlayers.join(', ')}` : '';
     }
 
-    // --- FIX: Completely rebuilt openLayer function for simplicity and correctness ---
     function openLayer() {
         if (!gameStarted || currentLayer > totalLayers || isActionInProgress) return;
-
         isActionInProgress = true;
+
         const layer = document.getElementById(`layer${currentLayer}`);
         if (!layer) {
             isActionInProgress = false;
             return;
         }
 
-        const taskIndex = currentLayer - 2; // Tasks start from layer 2
+        layerToShowTask = layer; // Keep a reference to this layer
         
-        // Display the task on the layer before removing it
-        if (currentLayer > 1 && currentLayer < totalLayers) {
-             layer.innerHTML = `<div style="font-size: 0.8em; margin-bottom: 5px; color: #fff; font-weight: bold;">משימה ${currentLayer - 1}</div><div style="font-size: 1rem; line-height: 1.3;">${tasks[taskIndex]}</div>`;
-        }
-        
-        layer.classList.add('layer-removed');
-
+        // Shake animation
         const packageContainer = document.querySelector('.package-container');
         packageContainer.style.animation = 'shake 0.5s ease-in-out';
         setTimeout(() => packageContainer.style.animation = '', 500);
 
-        document.getElementById('layerCounter').textContent = totalLayers - currentLayer;
+        // Display task on the layer (if it's not the first or last layer)
+        if (currentLayer > 1 && currentLayer < totalLayers) {
+            const taskIndex = currentLayer - 2;
+            layer.innerHTML = `<div style="font-size: 0.8em; margin-bottom: 10px; color: #fff; font-weight: bold;">משימה ${currentLayer - 1}</div><div style="font-size: 1.1rem; line-height: 1.4;">${tasks[taskIndex]}</div>`;
+            document.getElementById('mainInstructions').textContent = 'קרא/י את המשימה ובחר/י למי להעביר את החבילה 👇';
+        } else {
+            document.getElementById('mainInstructions').textContent = 'בחר/י למי להעביר את החבילה 👇';
+        }
         
-        // Decide what to do after the layer is removed
-        setTimeout(() => {
-            if (currentLayer < totalLayers) {
-                showPlayerSelection();
-            } else { // This is the last layer
-                startConfettiCelebration();
-                setTimeout(() => {
-                    document.getElementById('game-phase').style.display = 'none';
-                    document.getElementById('game-over').style.display = 'block';
-                }, 4000);
-            }
-            currentLayer++;
-        }, 1200); // Wait for animation and for player to read the task
+        // Show player selection
+        showPlayerSelection();
     }
 
     function showPlayerSelection() {
@@ -522,36 +485,68 @@
         const playerButtons = document.getElementById('playerButtons');
         
         currentPlayerName.textContent = players[currentPlayerIndex];
-        playerSelection.style.display = 'block';
         
-        const availablePlayers = players.filter((player, index) => index !== currentPlayerIndex);
+        const availablePlayers = players.filter((_, index) => index !== currentPlayerIndex);
         playerButtons.innerHTML = availablePlayers.map(player => 
             `<button class="player-btn" onclick="selectNextPlayer('${player}')">${player}</button>`
         ).join('');
+
+        playerSelection.style.display = 'block';
     }
 
     function selectNextPlayer(selectedPlayer) {
-        currentPlayerIndex = players.indexOf(selectedPlayer);
+        // 1. Animate away the old layer that was showing the task
+        if (layerToShowTask) {
+            layerToShowTask.classList.add('layer-removed');
+            document.getElementById('layerCounter').textContent = totalLayers - currentLayer;
+        }
+
+        // 2. Hide player selection and update game state for the next turn
         document.getElementById('playerSelection').style.display = 'none';
-        updateCurrentPlayer();
-        isActionInProgress = false; // Allow next action
+        currentPlayerIndex = players.indexOf(selectedPlayer);
+        currentLayer++;
+        
+        // 3. Check for game over
+        if (currentLayer > totalLayers) {
+            startConfettiCelebration();
+            setTimeout(() => {
+                document.getElementById('game-phase').style.display = 'none';
+                document.getElementById('game-over').style.display = 'block';
+            }, 4000);
+        } else {
+            // 4. Prepare for next turn
+            updateCurrentPlayer();
+            document.getElementById('mainInstructions').textContent = '👇 לחץ/י על החבילה כדי לפתוח שכבה ולגלות את המשימה! 👇';
+            layerToShowTask = null;
+            isActionInProgress = false; // Allow the next click
+        }
     }
 
+    // --- Reset and End Game Functions ---
+    function resetGame() {
+        // ... (The resetGame and other functions remain the same as the previous version)
+    }
+    
+    // ... (All other functions: resetGame, startConfettiCelebration, event listeners)
     function resetGame() {
         if (gameStarted && !confirm('האם את/ה בטוח/ה? המשחק יתחיל מחדש.')) {
             return;
         }
 
-        currentLayer = 1;
+        players = [];
         currentPlayerIndex = 0;
+        currentLayer = 1;
         gameStarted = false;
         usedPlayers = [];
         isActionInProgress = false;
+        layerToShowTask = null;
 
         document.getElementById('setup-phase').style.display = 'block';
         document.getElementById('game-phase').style.display = 'none';
         document.getElementById('game-over').style.display = 'none';
         document.getElementById('playerSelection').style.display = 'none';
+        document.getElementById('mainInstructions').textContent = '👇 לחץ/י על החבילה כדי לפתוח שכבה ולגלות את המשימה! 👇';
+
 
         for (let i = 1; i <= totalLayers; i++) {
             const layer = document.getElementById(`layer${i}`);
@@ -559,13 +554,14 @@
                 layer.classList.remove('layer-removed');
                 layer.style.fontSize = '1.5em';
                 layer.style.fontWeight = 'bold';
-                layer.innerHTML = ``; // Clear content
+                layer.innerHTML = ``; 
                 if (i === 1) layer.textContent = 'לחץ/י כאן!';
                 else if (i < totalLayers) layer.textContent = `שכבה ${i}`;
                 else layer.textContent = `🎉הפתעה!🎉`;
             }
         }
         document.getElementById('layerCounter').textContent = totalLayers;
+        updatePlayerList();
     }
 
     function startConfettiCelebration() {

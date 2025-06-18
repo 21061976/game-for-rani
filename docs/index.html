@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
         }
+        
         .game-container {
             background: white;
             border-radius: 20px;
@@ -24,17 +25,20 @@
             width: 100%;
             text-align: center;
         }
+        
         .title {
             color: #333;
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
+        
         .subtitle {
             color: #666;
             font-size: 1.2em;
             margin-bottom: 30px;
         }
+        
         .package-container {
             position: relative;
             width: 300px;
@@ -43,9 +47,11 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
+        
         .package-container:hover {
             transform: scale(1.05);
         }
+        
         .package-layer {
             position: absolute;
             top: 0;
@@ -63,7 +69,7 @@
             transition: all 0.5s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
-        /* כל צבעי השכבות כמו בקוד שלך */
+        
         .layer-1 { background: linear-gradient(45deg, #ff6b6b, #ee5a52); z-index: 28; }
         .layer-2 { background: linear-gradient(45deg, #4ecdc4, #44a08d); z-index: 27; }
         .layer-3 { background: linear-gradient(45deg, #45b7d1, #2980b9); z-index: 26; }
@@ -92,9 +98,11 @@
         .layer-26 { background: linear-gradient(45deg, #81c784, #aed581); z-index: 3; }
         .layer-27 { background: linear-gradient(45deg, #64b5f6, #42a5f5); z-index: 2; }
         .layer-28 { background: linear-gradient(45deg, #ffd54f, #ffecb3); z-index: 1; }
+        
         .layer-removed {
             animation: tearAway 0.8s ease-out forwards;
         }
+        
         .current-player {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
@@ -105,6 +113,7 @@
             margin-bottom: 20px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
+        
         .task-display {
             background: linear-gradient(45deg, #ffeaa7, #fab1a0);
             border-radius: 15px;
@@ -119,6 +128,7 @@
             justify-content: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
+        
         .instructions {
             background: #f8f9fa;
             border-radius: 10px;
@@ -127,12 +137,14 @@
             color: #495057;
             font-size: 1.1em;
         }
+        
         .controls {
             display: flex;
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
         }
+        
         .btn {
             padding: 12px 25px;
             border: none;
@@ -144,30 +156,37 @@
             color: white;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        
         .btn-primary {
             background: linear-gradient(45deg, #667eea, #764ba2);
         }
+        
         .btn-success {
             background: linear-gradient(45deg, #56ab2f, #a8e6cf);
         }
+        
         .btn-warning {
             background: linear-gradient(45deg, #f093fb, #f5576c);
         }
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
+        
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
+        
         .player-setup {
             background: #f8f9fa;
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
         }
+        
         .player-input {
             padding: 12px;
             border: 2px solid #ddd;
@@ -176,6 +195,7 @@
             margin: 10px;
             width: 200px;
         }
+        
         .player-list {
             display: flex;
             flex-wrap: wrap;
@@ -183,6 +203,7 @@
             justify-content: center;
             margin: 15px 0;
         }
+        
         .player-tag {
             background: linear-gradient(45deg, #4ecdc4, #44a08d);
             color: white;
@@ -190,6 +211,7 @@
             border-radius: 20px;
             font-weight: bold;
         }
+        
         .game-over {
             background: linear-gradient(45deg, #56ab2f, #a8e6cf);
             color: white;
@@ -199,6 +221,7 @@
             font-weight: bold;
             margin: 20px 0;
         }
+        
         .layer-counter {
             position: absolute;
             top: -10px;
@@ -215,6 +238,7 @@
             font-size: 1.2em;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        
         .player-selection {
             background: linear-gradient(45deg, #ffeaa7, #fab1a0);
             border-radius: 15px;
@@ -222,16 +246,19 @@
             margin: 20px 0;
             display: none;
         }
+        
         .player-selection h3 {
             color: #2d3436;
             margin-bottom: 15px;
         }
+        
         .player-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
         }
+        
         .player-btn {
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
@@ -243,21 +270,25 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        
         .player-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             background: linear-gradient(45deg, #764ba2, #667eea);
         }
+        
         .player-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
+        
         .used-players {
             color: #666;
             font-size: 0.9em;
             margin-top: 10px;
         }
+        
         .confetti {
             position: fixed;
             width: 10px;
@@ -265,12 +296,14 @@
             z-index: 9999;
             pointer-events: none;
         }
+        
         .confetti.red { background: #ff6b6b; }
         .confetti.blue { background: #4ecdc4; }
         .confetti.yellow { background: #feca57; }
         .confetti.green { background: #48dbfb; }
         .confetti.purple { background: #ff9ff3; }
         .confetti.orange { background: #ff9f43; }
+        
         .celebration-overlay {
             position: fixed;
             top: 0;
@@ -284,6 +317,7 @@
             justify-content: center;
             flex-direction: column;
         }
+        
         .celebration-text {
             color: white;
             font-size: 4em;
@@ -292,12 +326,14 @@
             margin-bottom: 20px;
             animation: rainbow 2s infinite;
         }
+        
         .celebration-subtext {
             color: white;
             font-size: 2em;
             text-align: center;
             animation: pulse 1s infinite;
         }
+        
         @keyframes tearAway {
             0% { 
                 transform: scale(1) rotate(0deg);
@@ -320,16 +356,19 @@
                 opacity: 0;
             }
         }
+        
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-5px) rotate(-1deg); }
             75% { transform: translateX(5px) rotate(1deg); }
         }
+        
         @keyframes bounce {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
+        
         @keyframes confetti-fall {
             0% {
                 transform: translateY(-100vh) rotate(0deg);
@@ -340,6 +379,7 @@
                 opacity: 0;
             }
         }
+        
         @keyframes rainbow {
             0% { color: #ff6b6b; }
             16% { color: #4ecdc4; }
@@ -349,6 +389,7 @@
             80% { color: #43e97b; }
             100% { color: #ff6b6b; }
         }
+        
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
@@ -359,6 +400,7 @@
     <div class="game-container">
         <h1 class="title">🎁 חבילה עוברת דיגיטלית</h1>
         <p class="subtitle">משחק קבוצתי מהנה לכיתה ג'2 צופית</p>
+        
         <div id="setup-phase">
             <div class="player-setup">
                 <h3>הגדרת שחקנים</h3>
@@ -369,15 +411,16 @@
                 <button onclick="startGame()" class="btn btn-success" id="startBtn" disabled>התחל משחק!</button>
             </div>
         </div>
+        
         <div id="game-phase" style="display: none;">
             <div class="instructions">
-                לחץ על החבילה כדי לפתוח שכבה ולגלות את ההיגד!<br>
-                אחרי החשיפה, בחר למי להעביר את החבילה!
+                לחץ על החבילה כדי לפתוח שכבה ולגלות את ההיגד!
             </div>
+            
             <div class="current-player" id="currentPlayer"></div>
+            
             <div class="package-container" onclick="openLayer()">
                 <div class="layer-counter" id="layerCounter">28</div>
-                <!-- 28 שכבות -->
                 <div class="package-layer layer-1" id="layer1">שכבה 1</div>
                 <div class="package-layer layer-2" id="layer2">שכבה 2</div>
                 <div class="package-layer layer-3" id="layer3">שכבה 3</div>
@@ -407,18 +450,22 @@
                 <div class="package-layer layer-27" id="layer27">שכבה 27</div>
                 <div class="package-layer layer-28" id="layer28">🎁 מתנה!</div>
             </div>
+            
             <div class="task-display" id="taskDisplay">
                 לחץ על החבילה כדי להתחיל!
             </div>
+            
             <div class="player-selection" id="playerSelection">
                 <h3><span id="currentPlayerName"></span> קרא/י את המשימה ובחר/י למי להעביר את החבילה!</h3>
                 <div class="player-buttons" id="playerButtons"></div>
                 <div class="used-players" id="usedPlayers"></div>
             </div>
+            
             <div class="controls">
                 <button onclick="resetGame()" class="btn btn-warning">איפוס משחק</button>
             </div>
         </div>
+        
         <div id="game-over" style="display: none;">
             <div class="game-over">
                 🎉 המשחק הסתיים! 🎉<br>
@@ -427,6 +474,7 @@
             <button onclick="resetGame()" class="btn btn-primary">משחק חדש</button>
         </div>
     </div>
+
     <script>
         let players = [];
         let currentPlayerIndex = 0;
@@ -434,7 +482,7 @@
         let gameStarted = false;
         let usedPlayers = [];
         let taskCompleted = false;
-        let isTaskRevealed = false;
+        
         const tasks = [
             "שלח את החבילה עוברת לתלמיד/ה שמאחר/ת באופן קבוע לבית הספר",
             "שלח את החבילה עוברת לתלמיד/ה שמתארגן/ת הכי מהר לשיעורים",
@@ -465,7 +513,7 @@
             "שלח את החבילה עוברת לתלמיד/ה שאף פעם לא צועק בכיתה",
             "🎉 שלח את הקונפטי שבחבילה עוברת לכל תלמידי הכיתה! 🎊"
         ];
-
+        
         function addPlayer() {
             const playerName = document.getElementById('playerName').value.trim();
             if (playerName && !players.includes(playerName)) {
@@ -475,125 +523,138 @@
                 document.getElementById('startBtn').disabled = players.length < 2;
             }
         }
+        
         function clearPlayers() {
             players = [];
             updatePlayerList();
             document.getElementById('startBtn').disabled = true;
         }
+        
         function updatePlayerList() {
             const playerList = document.getElementById('playerList');
             playerList.innerHTML = players.map(player => 
                 `<span class="player-tag">${player}</span>`
             ).join('');
         }
+        
         function startGame() {
             if (players.length < 2) return;
+            
             gameStarted = true;
             usedPlayers = [];
-            currentPlayerIndex = 0;
-            currentLayer = 1;
-            taskCompleted = false;
-            isTaskRevealed = false;
             document.getElementById('setup-phase').style.display = 'none';
             document.getElementById('game-phase').style.display = 'block';
             updateCurrentPlayer();
-            document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי להתחיל!';
-            document.getElementById('layerCounter').textContent = '28';
         }
+        
         function updateCurrentPlayer() {
             const currentPlayerDiv = document.getElementById('currentPlayer');
             currentPlayerDiv.textContent = `תור של: ${players[currentPlayerIndex]}`;
+            
             if (!usedPlayers.includes(players[currentPlayerIndex])) {
                 usedPlayers.push(players[currentPlayerIndex]);
             }
+            
             updateUsedPlayersList();
         }
+        
         function updateUsedPlayersList() {
             const usedPlayersDiv = document.getElementById('usedPlayers');
             if (usedPlayers.length > 0) {
                 usedPlayersDiv.textContent = `שחקנים ששיחקו כבר: ${usedPlayers.join(', ')}`;
             }
         }
-
+        
         function openLayer() {
             if (!gameStarted || currentLayer > 28 || taskCompleted) return;
-            if (isTaskRevealed) return; // מונע מעבר שכבה לפני בחירת שחקן
-
-            // פותח שכבה (העלם)
+            
             const layer = document.getElementById(`layer${currentLayer}`);
             if (layer) layer.classList.add('layer-removed');
+            
             const packageContainer = document.querySelector('.package-container');
             packageContainer.style.animation = 'shake 0.5s ease-in-out';
-            setTimeout(() => { packageContainer.style.animation = ''; }, 500);
-
-            // הצג משימה עם מספור
+            setTimeout(() => {
+                packageContainer.style.animation = '';
+            }, 500);
+            
             const taskDisplay = document.getElementById('taskDisplay');
             if (currentLayer <= tasks.length) {
-                taskDisplay.textContent = `(${currentLayer}/28) ${tasks[currentLayer - 1]}`;
+                taskDisplay.textContent = tasks[currentLayer - 1];
                 taskDisplay.style.animation = 'bounce 0.8s ease-out';
-                setTimeout(() => { taskDisplay.style.animation = ''; }, 800);
+                setTimeout(() => {
+                    taskDisplay.style.animation = '';
+                }, 800);
             } else {
                 taskDisplay.textContent = "🎁 מצאת את המתנה! כל הכבוד!";
             }
+            
             const layerCounter = document.getElementById('layerCounter');
             layerCounter.textContent = 28 - currentLayer;
-
-            // פותח רק את בוחר השחקנים (לא מתקדם)
-            setTimeout(() => {
-                showPlayerSelection();
-                isTaskRevealed = true; // עכשיו חייב לבחור תלמיד
-            }, 1000);
+            
+            if (currentLayer === 28) {
+                setTimeout(() => {
+                    startConfettiCelebration();
+                }, 1000);
+            } else {
+                setTimeout(() => {
+                    showPlayerSelection();
+                }, 1000);
+            }
+            
+            currentLayer++;
+            
+            if (currentLayer > 28) {
+                setTimeout(() => {
+                    document.getElementById('game-phase').style.display = 'none';
+                    document.getElementById('game-over').style.display = 'block';
+                }, 4000);
+            }
         }
-
+        
         function showPlayerSelection() {
             const playerSelection = document.getElementById('playerSelection');
             const currentPlayerName = document.getElementById('currentPlayerName');
             const playerButtons = document.getElementById('playerButtons');
+            
             currentPlayerName.textContent = players[currentPlayerIndex];
             playerSelection.style.display = 'block';
+            
             const availablePlayers = players.filter((player, index) => index !== currentPlayerIndex);
+            
             playerButtons.innerHTML = availablePlayers.map(player => 
                 `<button class="player-btn" onclick="selectNextPlayer('${player}')">${player}</button>`
             ).join('');
         }
+        
         function selectNextPlayer(selectedPlayer) {
             currentPlayerIndex = players.indexOf(selectedPlayer);
             document.getElementById('playerSelection').style.display = 'none';
             updateCurrentPlayer();
             taskCompleted = false;
             document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי לפתוח את השכבה הבאה!';
-            isTaskRevealed = false; // רק עכשיו אפשר לעבור לשכבה הבאה
-            currentLayer++;
-
-            if (currentLayer > 28) {
-                setTimeout(() => {
-                    document.getElementById('game-phase').style.display = 'none';
-                    document.getElementById('game-over').style.display = 'block';
-                }, 2000);
-            } else if (currentLayer === 28) {
-                setTimeout(() => {
-                    startConfettiCelebration();
-                }, 1000);
-            }
         }
+        
         function resetGame() {
             currentLayer = 1;
             currentPlayerIndex = 0;
             gameStarted = false;
             usedPlayers = [];
             taskCompleted = false;
-            isTaskRevealed = false;
+            
             document.getElementById('setup-phase').style.display = 'block';
             document.getElementById('game-phase').style.display = 'none';
             document.getElementById('game-over').style.display = 'none';
             document.getElementById('playerSelection').style.display = 'none';
+            
             for (let i = 1; i <= 28; i++) {
                 const layer = document.getElementById(`layer${i}`);
                 if (layer) layer.classList.remove('layer-removed');
             }
+            
             document.getElementById('taskDisplay').textContent = 'לחץ על החבילה כדי להתחיל!';
             document.getElementById('layerCounter').textContent = '28';
         }
+
         function startConfettiCelebration() {
             const overlay = document.createElement('div');
             overlay.className = 'celebration-overlay';
@@ -603,7 +664,9 @@
                 <div class="celebration-subtext">סיימתם את כל המשימות!</div>
             `;
             document.body.appendChild(overlay);
+            
             const colors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange'];
+            
             for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
@@ -612,13 +675,18 @@
                     confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
                     confetti.style.animation = `confetti-fall ${confetti.style.animationDuration} linear`;
                     document.body.appendChild(confetti);
-                    setTimeout(() => { confetti.remove(); }, 5000);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
                 }, i * 50);
             }
+            
             setTimeout(() => {
                 overlay.remove();
             }, 4000);
         }
+        
         document.getElementById('playerName').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 addPlayer();
